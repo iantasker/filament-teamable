@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace FilamentTenant;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -14,14 +14,14 @@ use Livewire\Testing\TestableLivewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
+use FilamentTenant\Commands\FilamentTenantCommand;
+use FilamentTenant\Testing\TestsFilamentTenant;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class FilamentTenantServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'filament-tenant';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'filament-tenant';
 
     public function configurePackage(Package $package): void
     {
@@ -34,10 +34,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
             ->hasCommands($this->getCommands())
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
-                    ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
+                    ->askToStarRepoOnGitHub('iantasker/filament-tenant');
             });
 
         $configFileName = $package->shortName();
@@ -83,18 +82,18 @@ class SkeletonServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/filament-tenant/{$file->getFilename()}"),
+                ], 'filament-tenant-stubs');
             }
         }
 
         // Testing
-        TestableLivewire::mixin(new TestsSkeleton());
+        //TestableLivewire::mixin(new TestsFilamentTenant());
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'iantasker/filament-tenant';
     }
 
     /**
@@ -103,9 +102,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('filament-tenant', __DIR__ . '/../resources/dist/components/filament-tenant.js'),
+            //Css::make('filament-tenant-styles', __DIR__ . '/../resources/dist/filament-tenant.css'),
+            //Js::make('filament-tenant-scripts', __DIR__ . '/../resources/dist/filament-tenant.js'),
         ];
     }
 
@@ -115,7 +114,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            SkeletonCommand::class,
+            
         ];
     }
 
@@ -149,7 +148,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_skeleton_table',
+            'create_tenants_table',
+            'create_tenant_user_table',
+            'create_tenant_invitations_table',
+            'update_users_table',
         ];
     }
 }
