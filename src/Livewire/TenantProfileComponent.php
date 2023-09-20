@@ -8,10 +8,10 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
 
-class TenantProfileComponent extends Component implements HasForms, HasActions
+class TenantProfileComponent extends Component implements HasActions, HasForms
 {
-    use InteractsWithForms;
     use InteractsWithActions;
+    use InteractsWithForms;
 
     public $sort = 0;
 
