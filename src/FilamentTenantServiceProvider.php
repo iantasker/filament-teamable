@@ -9,13 +9,12 @@ use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\Icons\Icon;
+use FilamentTenant\Testing\TestsFilamentTenant;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Testing\TestableLivewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use FilamentTenant\Commands\FilamentTenantCommand;
-use FilamentTenant\Testing\TestsFilamentTenant;
 
 class FilamentTenantServiceProvider extends PackageServiceProvider
 {
@@ -114,7 +113,7 @@ class FilamentTenantServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            
+
         ];
     }
 

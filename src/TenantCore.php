@@ -2,15 +2,12 @@
 
 namespace FilamentTenant;
 
-use Closure;
-use Filament\Forms;
-use Filament\Panel;
-use Livewire\Livewire;
 use Filament\Contracts\Plugin;
 use Filament\Facades\Filament;
 use Filament\Navigation\MenuItem;
+use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
-use FilamentTenant\Pages;
+use Livewire\Livewire;
 
 class TenantCore implements Plugin
 {
@@ -21,7 +18,9 @@ class TenantCore implements Plugin
     public static $membershipModel = 'App\\Models\\Membership';
 
     protected $hasProfile = false;
+
     protected $hasAddress = false;
+
     protected $registeredTenantProfileComponents = [];
 
     public function getId(): string
@@ -32,12 +31,12 @@ class TenantCore implements Plugin
     public function register(Panel $panel): void
     {
         $panel->pages([
-            Pages\TenantProfilePage::class
+            Pages\TenantProfilePage::class,
         ]);
     }
 
     public function boot(Panel $panel): void
-    {   
+    {
         if ($this->hasProfile) {
             Livewire::component('tenant_info', Livewire\TenantInfo::class);
             $this->tenantProfileComponents(array_merge([
@@ -45,8 +44,8 @@ class TenantCore implements Plugin
             ], $this->registeredTenantProfileComponents));
 
             $panel->tenantMenuItems([
-                 'profile' => MenuItem::make()->url(fn () => (Pages\TenantProfilePage::getUrl()))->label(__('Settings')),
-             ]);
+                'profile' => MenuItem::make()->url(fn () => (Pages\TenantProfilePage::getUrl()))->label(__('Settings')),
+            ]);
         }
     }
 
@@ -90,13 +89,14 @@ class TenantCore implements Plugin
             ...$this->registeredTenantProfileComponents,
             ...$components,
         ];
-        
+
         return $this;
     }
 
     public function getRegisteredTenantProfileComponents(): array
     {
         $components = $this->registeredTenantProfileComponents;
+
         return collect($components)->all();
     }
 

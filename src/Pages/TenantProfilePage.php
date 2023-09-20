@@ -2,15 +2,13 @@
 
 namespace FilamentTenant\Pages;
 
-use Filament\Facades\Filament;
 use Filament\Pages\Page;
-use Illuminate\Database\Eloquent\Model;
 
 class TenantProfilePage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static ?string $slug = "profile";
+    protected static ?string $slug = 'profile';
 
     protected static string $view = 'filament-tenant::filament.pages.profile';
 
@@ -39,7 +37,7 @@ class TenantProfilePage extends Page
         return false;
     }
 
-    public function getRegisteredTenantProfileComponents (): array
+    public function getRegisteredTenantProfileComponents(): array
     {
         return filament('filament-tenant')->getRegisteredTenantProfileComponents();
     }
@@ -48,5 +46,4 @@ class TenantProfilePage extends Page
     {
         return true;
     }
-
 }

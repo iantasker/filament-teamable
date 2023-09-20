@@ -2,17 +2,15 @@
 
 namespace FilamentTenant\Livewire;
 
-use Filament\Forms;
-use Filament\Tables;
 use Filament\Facades\Filament;
-use Filament\Notifications\Notification;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms;
 
-class Address extends MyProfileComponent 
+class Address extends MyProfileComponent
 {
-    protected string $view = "filament-tenant::livewire.address";
+    protected string $view = 'filament-tenant::livewire.address';
 
     public $panel;
+
     public $tenant;
 
     public function mount()
@@ -39,7 +37,7 @@ class Address extends MyProfileComponent
                 ->label(__('filament-tenant::default.fields.billing_zip')),
             Forms\Components\TextInput::make('billing_country')
                 ->required()
-                ->label(__('filament-tenant::default.fields.billing_country'))
+                ->label(__('filament-tenant::default.fields.billing_country')),
         ])->columnSpan(3);
     }
 
@@ -49,7 +47,4 @@ class Address extends MyProfileComponent
             ->schema($this->getProfileFormSchema())->columns(3)
             ->statePath('data');
     }
-
-
-
 }

@@ -2,18 +2,21 @@
 
 namespace FilamentTenant\Livewire;
 
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
 
 class TenantInfo extends TenantProfileComponent
 {
-    protected string $view = "filament-tenant::livewire.tenant-info";
+    protected string $view = 'filament-tenant::livewire.tenant-info';
 
     public ?array $data = [];
+
     public $panel;
+
     public $tenant;
+
     public $tenantClass;
 
     public function mount()
@@ -34,7 +37,7 @@ class TenantInfo extends TenantProfileComponent
                 ->required()
                 ->email()
                 ->unique($this->userClass, ignorable: $this->user)
-                ->label(__('filament-tenant::default.fields.email'))
+                ->label(__('filament-tenant::default.fields.email')),
         ])->columnSpan(3);
     }
 
@@ -54,5 +57,4 @@ class TenantInfo extends TenantProfileComponent
             ->title(__('filament-tenant::default.profile.tenant_info.notify'))
             ->send();
     }
-
 }

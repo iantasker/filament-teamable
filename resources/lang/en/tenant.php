@@ -1,7 +1,6 @@
 <?php
 
 // translations for FilamentTenant
-<?php
 
 return [
     "password_confirm" => [

@@ -1,21 +1,21 @@
 <?php
 
 use Filament\Facades\Filament;
-use Illuminate\Support\Facades\Route;
 use FilamentTenant\Features;
-use FilamentTenant\Http\Controllers\TenantInvitationController;
 use FilamentTenant\Http\Controllers\OAuthController;
+use FilamentTenant\Http\Controllers\TenantInvitationController;
 use FilamentTenant\Models\Tenant;
 use FilamentTenant\Pages\Auth\PrivacyPolicy;
 use FilamentTenant\Pages\Auth\Terms;
 use FilamentTenant\Socialite;
+use Illuminate\Support\Facades\Route;
 
 Route::name('filament.')
     ->group(static function () {
         foreach (Filament::getPanels() as $panel) {
             $hasPlugin = $panel->hasPlugin('filament-tenant');
 
-            if (!$hasPlugin) {
+            if (! $hasPlugin) {
                 continue;
             }
 
@@ -29,11 +29,11 @@ Route::name('filament.')
                     ->middleware($panel->getMiddleware())
                     ->name("{$panelId}.")
                     ->prefix($panel->getPath())
-                    ->group(static function () use ($plugin, $hasTenancy) {
-                        
+                    ->group(static function () use ($plugin) {
+
                         $tenant_types = Tenant::childTypes;
-                        
-                        foreach($tenant_types as $tenant_type) {
+
+                        foreach ($tenant_types as $tenant_type) {
                             $singleSlug = Str::kebab(class_basename($tenant_type));
                             $pluralSlug = Str::kebab(Str::plural(class_basename($tenant_type)));
 
