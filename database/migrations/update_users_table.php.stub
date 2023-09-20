@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table(filament('filament-tenant')->getUsersTableName(), function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->foreignId('current_tenant_id')->nullable();
             $table->foreignId('current_connected_account_id')->nullable();
         });
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table(filament('filament-tenant')->getUsersTableName(), function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('current_tenant_id');
             $table->dropColumn('current_connected_account_id');
         });

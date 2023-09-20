@@ -16,6 +16,10 @@ class TenantCore implements Plugin
 {
     use EvaluatesClosures;
 
+    public static $userModel = 'App\\Models\\User';
+
+    public static $membershipModel = 'App\\Models\\Membership';
+
     protected $hasProfile = false;
     protected $hasAddress = false;
     protected $registeredTenantProfileComponents = [];
@@ -104,5 +108,36 @@ class TenantCore implements Plugin
     public static function get(): static
     {
         return filament(app(static::class)->getId());
+    }
+
+    public static function userModel()
+    {
+        return static::$userModel;
+    }
+
+    public static function newUserModel()
+    {
+        $model = static::userModel();
+
+        return new $model;
+    }
+
+    public static function useUserModel(string $model)
+    {
+        static::$userModel = $model;
+
+        return new static;
+    }
+
+    public static function membershipModel()
+    {
+        return static::$membershipModel;
+    }
+
+    public static function useMembershipModel(string $model)
+    {
+        static::$membershipModel = $model;
+
+        return new static;
     }
 }
